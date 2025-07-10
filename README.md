@@ -45,6 +45,44 @@ It provides a simple object-oriented interface to authenticate, query device inf
 
 ---
 
+## Add as a Dependency
+If you are using Maven, add the following dependency to your `pom.xml`:
+```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+```
+```xml
+<dependencies>
+    <dependency>
+        <groupId>com.github.JustOfPlay</groupId>
+        <artifactId>XledJava</artifactId>
+        <version>main-SNAPSHOT</version>
+    </dependency>
+</dependencies>
+```
+
+If you are using Gradle, add the following to your `build.gradle`:
+```groovy
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+```groovy
+dependencies {
+    implementation 'com.github.JustOfPlay:XledJava:main-SNAPSHOT'
+}
+```
+
+
+
 ## Usage
 
 ### Basic Example
