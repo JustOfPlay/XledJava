@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"Alle Klassen und Schnittstellen","u":"allclasses-index.html"},{"p":"de.justofplay.xled","l":"Device"},{"p":"de.justofplay.xled","l":"Login"},{"p":"de.justofplay.xled","l":"Main"},{"p":"de.justofplay.xled","l":"Mode"},{"p":"de.justofplay.xled.utils","l":"Requester"}];updateSearchResults();
