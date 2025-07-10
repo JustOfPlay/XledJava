@@ -18,8 +18,8 @@ var sortDesc = "sort-desc";
 var tableTab = "table-tab";
 var activeTableTab = "active-table-tab";
 
-const linkIcon = "Linksymbol";
-const linkToSection = "Link zu diesem Abschnitt";
+const linkIcon = "Link icon";
+const linkToSection = "Link to this section";
 
 function loadScripts(doc, tag) {
     createElem(doc, tag, 'script-files/search.js');

@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"Alle Packages","u":"allpackages-index.html"},{"l":"de.justofplay.xled"},{"l":"de.justofplay.xled.utils"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"de.justofplay.xled"},{"l":"de.justofplay.xled.utils"}];updateSearchResults();
