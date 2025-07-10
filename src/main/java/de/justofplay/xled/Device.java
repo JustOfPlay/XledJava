@@ -1,18 +1,7 @@
-package de.justofplay.twinkly;
+package de.justofplay.xled;
 
-import de.justofplay.twinkly.utils.Requester;
-
-import java.io.IOException;
-import java.net.URI;
-import java.net.URLEncoder;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.util.HashMap;
-import java.util.Map;
-
-import static de.justofplay.twinkly.utils.Requester.postWithAuth;
-import static de.justofplay.twinkly.utils.Requester.sendGetWithToken;
+import static de.justofplay.xled.utils.Requester.postWithAuth;
+import static de.justofplay.xled.utils.Requester.sendGetWithToken;
 
 /**
  * Represents a Twinkly device and provides methods to interact with it via the Twinkly API.

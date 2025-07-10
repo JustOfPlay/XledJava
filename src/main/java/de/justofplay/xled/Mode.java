@@ -1,4 +1,4 @@
-package de.justofplay.twinkly;
+package de.justofplay.xled;
 
 public class Mode {
     public static final String OFF = "off";

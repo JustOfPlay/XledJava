@@ -1,6 +1,6 @@
-package de.justofplay.twinkly.utils;
+package de.justofplay.xled.utils;
 
-import de.justofplay.twinkly.Login;
+import de.justofplay.xled.Login;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -10,10 +10,20 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Utility class for sending HTTP requests to Twinkly devices.
+ */
 public class Requester {
 
-
-
+    /**
+     * Sends a POST request with a JSON body and custom headers.
+     * Returns the full HTTP response as a string (status, headers, body).
+     *
+     * @param url         The full URL to send the request to.
+     * @param jsonContent The JSON body to send.
+     * @param headers     The headers to include in the request.
+     * @return The full HTTP response as a string.
+     */
     public static String sendJsonPost(String url, String jsonContent, Map<String, String> headers) {
         try {
             URL urlObj = new URL(url);
@@ -95,6 +105,15 @@ public class Requester {
         }
     }
 
+    /**
+     * Sends a POST request with JSON body and authentication token (if available).
+     *
+     * @param path       The API path (e.g. "/xled/v1/login").
+     * @param jsonContent The JSON body to send.
+     * @param _login     The Login object containing the authentication token.
+     * @param _ip        The device IP address.
+     * @return The full HTTP response as a string.
+     */
     public static String postWithAuth(String path, String jsonContent, Login _login, String _ip) {
         String url = "http://" + _ip + path;
         Map<String, String> headers = new HashMap<>();
@@ -105,6 +124,13 @@ public class Requester {
         return Requester.sendJsonPost(url, jsonContent, headers);
     }
 
+    /**
+     * Sends a GET request with an authentication token.
+     *
+     * @param url   The full URL to send the request to.
+     * @param token The authentication token to include in the "X-Auth-Token" header.
+     * @return The full HTTP response as a string.
+     */
     public static String sendGetWithToken(String url, String token) {
         try {
             if (!url.startsWith("http://") && !url.startsWith("https://")) {
@@ -165,6 +191,5 @@ public class Requester {
             return "Exception: " + e.getMessage();
         }
     }
-
 
 }
