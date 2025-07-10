@@ -47,23 +47,7 @@ public class Device {
         return httpResponse.substring(jsonStart).trim();
     }
 
-    /**
-     * Constructs a Device object and initializes device info by logging in and querying the device.
-     * @param ip The IP address of the Twinkly device.
-     */
-    public Device(String ip) {
-        _ip = ip;
-        String loginResponse = login();
-        String loginJson = extractJsonBody(loginResponse);
-        if (loginJson == null || !loginJson.trim().startsWith("{")) {
-            _login = new Login("{}");
-        } else {
-            try {
-                _login = new Login(loginJson);
-            } catch (org.json.JSONException e) {
-                _login = new Login("{}");
-            }
-        }
+    private void enterDeviceInfo() {
         String respone = getDeviceInfo();
         if (respone != null && !respone.isEmpty()) {
             try {
@@ -95,50 +79,70 @@ public class Device {
         }
     }
 
+    /**
+     * Constructs a Device object and initializes device info by logging in and querying the device.
+     * @param ip The IP address of the Twinkly device.
+     */
+    public Device(String ip) {
+        _ip = ip;
+        String loginResponse = login();
+        String loginJson = extractJsonBody(loginResponse);
+        if (loginJson == null || !loginJson.trim().startsWith("{")) {
+            _login = new Login("{}");
+        } else {
+            try {
+                _login = new Login(loginJson);
+            } catch (org.json.JSONException e) {
+                _login = new Login("{}");
+            }
+        }
+        enterDeviceInfo();
+    }
+
     // --- Getters for device information ---
 
     /** @return The product name of the device. */
-    public String getProductName() {return _prduct_name;}
+    public String getProductName() {enterDeviceInfo();return _prduct_name;}
     /** @return The hardware version. */
-    public int getHardwareVersion() {return _hardware_version;}
+    public int getHardwareVersion() {enterDeviceInfo();return _hardware_version;}
     /** @return The number of bytes per LED. */
-    public int getBytesPerLed() {return _bytes_per_led;}
+    public int getBytesPerLed() {enterDeviceInfo();return _bytes_per_led;}
     /** @return The hardware ID. */
-    public String getHwId() {return _hw_id;}
+    public String getHwId() {enterDeviceInfo();return _hw_id;}
     /** @return The flash size. */
-    public int getFlashSize() {return _flash_size;}
+    public int getFlashSize() {enterDeviceInfo();return _flash_size;}
     /** @return The LED type. */
-    public int getLedType() {return _led_type;}
+    public int getLedType() {enterDeviceInfo();return _led_type;}
     /** @return The product code. */
-    public String getProductCode() {return _product_code;}
+    public String getProductCode() {enterDeviceInfo();return _product_code;}
     /** @return The firmware family. */
-    public String getFwFamily() {return _fw_family;}
+    public String getFwFamily() {enterDeviceInfo();return _fw_family;}
     /** @return The device name. */
-    public String getDeviceName() {return _device_name;}
+    public String getDeviceName() {enterDeviceInfo();return _device_name;}
     /** @return The uptime in seconds. */
-    public long getUptime() {return _uptime;}
+    public long getUptime() {enterDeviceInfo();return _uptime;}
     /** @return The MAC address. */
-    public String getMac() {return _mac;}
+    public String getMac() {enterDeviceInfo();return _mac;}
     /** @return The UUID. */
-    public String getUuid() {return _uuid;}
+    public String getUuid() {enterDeviceInfo();return _uuid;}
     /** @return The maximum supported number of LEDs. */
-    public int getMaxSupportedLeds() {return _max_supported_leds;}
+    public int getMaxSupportedLeds() {enterDeviceInfo();return _max_supported_leds;}
     /** @return The number of LEDs. */
-    public int getNumberOfLed() {return _number_of_led;}
+    public int getNumberOfLed() {enterDeviceInfo();return _number_of_led;}
     /** @return The LED profile. */
-    public String getLedProfile() {return _led_profile;}
+    public String getLedProfile() {enterDeviceInfo();return _led_profile;}
     /** @return The frame rate. */
-    public int getFrameRate() {return _frame_rate;}
+    public int getFrameRate() {enterDeviceInfo();return _frame_rate;}
     /** @return The measured frame rate. */
-    public float getMeasuredFrameRate() {return _measured_frame_rate;}
+    public float getMeasuredFrameRate() {enterDeviceInfo();return _measured_frame_rate;}
     /** @return The movie capacity. */
-    public int getMovieCapacity() {return _movie_capacity;}
+    public int getMovieCapacity() {enterDeviceInfo();return _movie_capacity;}
     /** @return The maximum number of movies. */
-    public int getMaxMovies() {return _max_movies;}
+    public int getMaxMovies() {enterDeviceInfo();return _max_movies;}
     /** @return The wire type. */
-    public int getWireType() {return _wire_type;}
+    public int getWireType() {enterDeviceInfo();return _wire_type;}
     /** @return The copyright string. */
-    public String getCopyright() {return _copyright;}
+    public String getCopyright() {enterDeviceInfo();return _copyright;}
 
     /** @return The Login object containing authentication info. */
     public Login getLogin() {
@@ -165,6 +169,12 @@ public class Device {
     public String login() {
         String jsonContent = "{ \"challenge\": \"twinkly\" }";
         return postWithAuth("/xled/v1/login", jsonContent, _login, _ip);
+    }
+
+    public String setDeviceName(String deviceName) {
+        verify();
+        String jsonContent = "{\"name\":\"" + deviceName + "\"}";
+        return postWithAuth("/xled/v1/device_name", jsonContent, _login, _ip);
     }
 
     /**
@@ -333,7 +343,7 @@ public class Device {
     public String setSaturation(int saturation) {
         verify();
         String jsonContent = "{\"mode\":\"enabled\",\"type\":\"A\",\"value\":"+ saturation +"}";
-        return postWithAuth("/xled/v1/led/saturation", jsonContent, _login, _ip);
+        return postWithAuth("/xled/v1/led/out/saturation", jsonContent, _login, _ip);
     }
 
     /**
