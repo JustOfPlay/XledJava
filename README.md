@@ -156,3 +156,5 @@ MIT License
 ---
 
 ## Contributors
+[![Contributors](https://contrib.rocks/image?repo=JustOfPlay/XledJava)](https://github.com/JustOfPlay/XledJava/graphs/contributors)
+
